@@ -1,0 +1,1725 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silent Script | Reviving Ancient Heritage</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-dark: #0a0f1a;
+            --bg-card: rgba(30, 41, 59, 0.7);
+            --bg-glass: rgba(15, 23, 42, 0.6);
+            --gold: #D4AF37;
+            --gold-light: #F1D279;
+            --gold-glow: rgba(212, 175, 55, 0.3);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: rgba(212, 175, 55, 0.2);
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --overlay-start: rgba(10, 15, 26, 0.85);
+            --overlay-end: rgba(10, 15, 26, 0.95);
+            --nav-bg: rgba(10, 15, 26, 0.8);
+            --nav-bg-scrolled: rgba(10, 15, 26, 0.95);
+            --footer-bg: #050810;
+        }
+
+        body.light-mode {
+            --bg-dark: #f0f4f8;
+            --bg-card: rgba(255, 255, 255, 0.8);
+            --bg-glass: rgba(255, 255, 255, 0.6);
+            --gold: #B8860B;
+            --gold-light: #DAA520;
+            --gold-glow: rgba(184, 134, 11, 0.1);
+            --text-main: #1a202c;
+            --text-muted: #4a5568;
+            --border-color: rgba(184, 134, 11, 0.3);
+            --overlay-start: rgba(240, 244, 248, 0.85);
+            --overlay-end: rgba(240, 244, 248, 0.95);
+            --nav-bg: rgba(255, 255, 255, 0.8);
+            --nav-bg-scrolled: rgba(255, 255, 255, 0.95);
+            --footer-bg: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image:
+                linear-gradient(to bottom, var(--overlay-start), var(--overlay-end)),
+                url('pictures/background.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+        }
+
+        .gold-text {
+            color: var(--gold);
+            text-shadow: 0 0 15px var(--gold-glow);
+        }
+
+        .glass-panel {
+            background: var(--bg-glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        section {
+            padding: 100px 20px;
+            max-width: 1280px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(50px) scale(0.98);
+            transition: opacity 1s cubic-bezier(0.2, 0.8, 0.2, 1),
+                transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--text-main);
+        }
+
+        .section-title span {
+            color: var(--gold);
+        }
+
+        /* --- Hero Section --- */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            padding-top: 5rem;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            background: rgba(184, 134, 11, 0.1);
+            border: 1px solid var(--gold);
+            border-radius: 30px;
+            color: var(--gold);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        #hero h1 {
+            font-size: clamp(3.5rem, 10vw, 6rem);
+            line-height: 1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -2px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        #hero p.tagline {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin-bottom: 3rem;
+            animation: fadeIn 2s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-team {
+            margin-bottom: 3rem;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .hero-team span {
+            color: var(--gold);
+            font-weight: 600;
+            position: relative;
+        }
+
+        .hero-team span::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--gold);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s ease;
+        }
+
+        .hero-team span:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 16px 36px;
+            border-radius: 12px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: 0.6s;
+        }
+
+        .btn:hover::after {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: var(--gold);
+            color: #0a0f1a;
+            box-shadow: 0 4px 15px var(--gold-glow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(212, 175, 55, 0.4);
+            background: var(--gold-light);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--gold);
+            border: 2px solid var(--gold);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(212, 175, 55, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.1);
+        }
+
+        /* --- Abstract & Stats --- */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-card {
+            padding: 2.5rem;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: var(--gold);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            background: rgba(30, 41, 59, 0.9);
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .stat-number {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #ffffff, var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .abstract-text {
+            font-size: 1.2rem;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 4rem auto;
+            color: var(--text-main);
+        }
+
+        /* --- The Problem --- */
+        .split-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        @media (max-width: 900px) {
+            .split-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .problem-content ul {
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .problem-content li {
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            font-size: 1.1rem;
+        }
+
+        .problem-content i {
+            color: var(--gold);
+            margin-top: 5px;
+            font-size: 1.2rem;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(45deg, var(--bg-card), rgba(184, 134, 11, 0.05));
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-muted);
+            border: 2px dashed var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-placeholder i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--gold);
+            opacity: 0.5;
+        }
+
+        /* --- Architecture --- */
+        .architecture-img {
+            width: 100%;
+            height: 300px;
+            margin-bottom: 3rem;
+        }
+
+        .stages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .stage-item {
+            padding: 1.5rem;
+            border-left: 3px solid var(--gold);
+            background: linear-gradient(90deg, rgba(212, 175, 55, 0.05), transparent);
+            transition: var(--transition);
+        }
+
+        .stage-item:hover {
+            transform: translateX(10px);
+            background: linear-gradient(90deg, rgba(212, 175, 55, 0.15), transparent);
+        }
+
+        /* --- Key Components --- */
+        .components-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .component-card {
+            padding: 2rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .component-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gold);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .component-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .component-card:hover {
+            background: rgba(30, 41, 59, 0.9);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .component-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .component-card .owner {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 5px 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--gold);
+            font-weight: 500;
+        }
+
+        /* --- Results --- */
+        .results-container {
+            display: flex;
+            flex-direction: column;
+            gap: 4rem;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            background: var(--bg-card);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        th,
+        td {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        th {
+            background: rgba(184, 134, 11, 0.1);
+            color: var(--gold);
+            font-weight: 600;
+            font-family: 'Outfit', sans-serif;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        tr:hover {
+            background: rgba(0, 0, 0, 0.02);
+        }
+
+        .progress-wrapper {
+            margin-top: 2rem;
+        }
+
+        .progress-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gold);
+            border-radius: 5px;
+            width: 0;
+            /* Animated via JS */
+            transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 10px var(--gold-glow);
+        }
+
+        /* --- Team --- */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .team-card {
+            text-align: center;
+            padding: 2.5rem 2rem;
+        }
+
+        .team-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem auto;
+            border: 3px solid var(--gold);
+            padding: 5px;
+            background: var(--bg-dark);
+        }
+
+        .team-photo img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            background: var(--bg-card);
+        }
+
+        .team-card h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .team-role {
+            color: var(--gold);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .team-affiliation {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .team-email {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .team-email:hover {
+            color: var(--gold);
+            letter-spacing: 0.5px;
+        }
+
+        /* --- Scroll Progress Indicator --- */
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(to right, var(--gold), var(--gold-light));
+            z-index: 1000;
+            box-shadow: 0 0 10px var(--gold-glow);
+        }
+
+        /* --- Documents --- */
+        .docs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .doc-card {
+            display: flex;
+            align-items: center;
+            padding: 1.5rem;
+            text-decoration: none;
+            color: var(--text-main);
+            transition: var(--transition);
+        }
+
+        .doc-card:hover {
+            background: rgba(184, 134, 11, 0.05);
+            border-color: var(--gold);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .doc-icon {
+            font-size: 2rem;
+            color: #e25555;
+            /* PDF Red */
+            margin-right: 1rem;
+        }
+
+        .doc-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .doc-info p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: var(--footer-bg);
+            padding: 4rem 20px;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .footer-logo {
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-logo img {
+            height: 80px;
+            width: auto;
+            opacity: 1;
+            transition: var(--transition);
+        }
+
+        .footer-logo img:hover {
+            transform: scale(1.05);
+        }
+
+        /* --- Navigation --- */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        nav.scrolled {
+            padding: 1rem 2rem;
+            background: var(--nav-bg-scrolled);
+        }
+
+        .nav-logo {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--text-main);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-logo span {
+            color: var(--gold);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .btn-nav {
+            padding: 10px 24px;
+            background: var(--gold);
+            color: var(--bg-dark);
+            border-radius: 8px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn-nav:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px var(--gold-glow);
+        }
+
+        /* --- Mobile Menu --- */
+        .mobile-menu-toggle {
+            display: none;
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1100;
+            padding: 5px;
+        }
+
+        @media (max-width: 992px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 400px;
+                height: 100vh;
+                background: var(--bg-dark);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 4rem 2rem;
+                transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+                box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5);
+                backdrop-filter: blur(20px);
+                border-left: 1px solid var(--border-color);
+                z-index: 1050;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links a {
+                font-size: 1.25rem;
+                width: 100%;
+                text-align: center;
+                padding: 1rem;
+            }
+
+            .btn-nav {
+                width: 100%;
+                text-align: center;
+                margin-top: 1rem;
+            }
+
+            .theme-switcher {
+                margin-top: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 80px 20px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+
+            #hero h1 {
+                font-size: 3rem;
+                letter-spacing: -1px;
+            }
+
+            .hero-badge {
+                font-size: 0.8rem;
+                padding: 6px 12px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-number {
+                font-size: 2.5rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-group {
+                flex-direction: column;
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* --- Theme Switcher --- */
+        .theme-switcher {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-color);
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1.1rem;
+        }
+
+        .theme-switcher:hover {
+            background: var(--gold-glow);
+            transform: rotate(15deg) scale(1.1);
+        }
+
+        .theme-switcher .fa-sun {
+            display: none;
+        }
+
+        .light-mode .theme-switcher .fa-sun {
+            display: block;
+        }
+
+        .light-mode .theme-switcher .fa-moon {
+            display: none;
+        }
+
+        /* --- Contact Us --- */
+        #contact {
+            text-align: center;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-card {
+            padding: 2rem;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .contact-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--gold);
+        }
+
+        .contact-card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 1.5rem;
+            border: 2px solid var(--gold);
+            object-fit: cover;
+        }
+
+        .contact-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .contact-card p {
+            font-size: 0.85rem;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            align-items: center;
+        }
+
+        .contact-link {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+
+        .contact-link:hover {
+            color: var(--gold);
+        }
+
+        .contact-link i {
+            width: 20px;
+            color: var(--gold);
+        }
+
+        /* --- Contact Form --- */
+        .contact-form-wrapper {
+            max-width: 700px;
+            margin: 4rem auto 0 auto;
+        }
+
+        .contact-form-wrapper h3 {
+            text-align: center;
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .contact-form-wrapper .form-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            padding: 2.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+        }
+
+        @media (max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .form-group label {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 0.85rem 1rem;
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            outline: none;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px var(--gold-glow);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--text-muted);
+            opacity: 0.6;
+        }
+
+        .btn-send {
+            padding: 14px 36px;
+            border-radius: 12px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 1.05rem;
+            border: none;
+            cursor: pointer;
+            background: var(--gold);
+            color: #0a0f1a;
+            box-shadow: 0 4px 15px var(--gold-glow);
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            align-self: center;
+            min-width: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-send:hover:not(:disabled) {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(212, 175, 55, 0.4);
+            background: var(--gold-light);
+        }
+
+        .btn-send:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .btn-send .spinner {
+            width: 18px;
+            height: 18px;
+            border: 2px solid transparent;
+            border-top-color: #0a0f1a;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+            display: none;
+        }
+
+        .btn-send.loading .spinner {
+            display: inline-block;
+        }
+
+        .btn-send.loading .btn-text {
+            opacity: 0;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .form-status {
+            text-align: center;
+            padding: 1rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .form-status.success {
+            display: block;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            color: #22c55e;
+        }
+
+        .form-status.error {
+            display: block;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #ef4444;
+        }
+    </style>
+
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+
+<body class="light-mode">
+    <div id="scroll-progress"></div>
+
+    <nav id="navbar">
+        <a href="#" class="nav-logo">Silent <span>Script</span></a>
+        <button class="mobile-menu-toggle" id="mobile-toggle">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <div class="nav-links" id="nav-menu">
+            <a href="#abstract">Overview</a>
+            <a href="#architecture">Architecture</a>
+            <a href="#results">Results</a>
+            <a href="#team" class="btn-nav">Contact Us</a>
+            <button class="theme-switcher" id="theme-toggle" title="Toggle Theme">
+                <i class="fa-solid fa-moon"></i>
+                <i class="fa-solid fa-sun"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="visible">
+        <div class="hero-badge">
+            <img src="pictures/sliit logo.png" alt="SLIIT Logo"
+                style="height: 18px; width: auto; vertical-align: middle; margin-right: 8px; filter: brightness(1.2);">
+            Sri Lankan Institute of Information Technology
+        </div>
+        <h1><span class="gold-text">Silent Script</span></h1>
+        <p class="tagline">An AI-powered pipeline to digitize, restore, and translate ancient Sri Lankan inscriptions
+            from degraded stone surfaces.</p>
+
+        <div class="hero-team">
+            <p>Developed by: <span>Lahiru Bandara, Amadhi Hansani, Senod Mesandu, Chamodya Handapangoda</span></p>
+        </div>
+
+        <div class="cta-group">
+            <a href="Silent_Script_Research_Paper.pdf" class="btn btn-primary" target="_blank"><i
+                    class="fa-regular fa-file-pdf"></i> Read Paper</a>
+            <!-- <a href="#demo" class="btn btn-secondary"><i class="fa-regular fa-circle-play"></i> View Demo</a> -->
+        </div>
+    </section>
+
+    <!-- Abstract Section -->
+    <section id="abstract">
+        <h2 class="section-title">Project <span>Overview</span></h2>
+        <p class="abstract-text">
+            Silent Script introduces a novel deep-learning architecture designed to automate the epigraphical analysis
+            of ancient Sri Lankan inscriptions. By combining image enhancement, instance segmentation, and neural
+            machine translation, the system successfully digitizes heavily degraded stone texts where traditional OCR
+            fails.
+        </p>
+
+        <div class="stats-grid">
+            <div class="stat-card glass-panel">
+                <i class="fa-solid fa-bullseye stat-icon"></i>
+                <div class="stat-number counter" data-target="94.6">0</div>
+                <div class="stat-label">Overall Accuracy (%)</div>
+            </div>
+            <div class="stat-card glass-panel">
+                <i class="fa-solid fa-stopwatch stat-icon"></i>
+                <div class="stat-number">10-20</div>
+                <div class="stat-label">Seconds Processing Time</div>
+            </div>
+            <div class="stat-card glass-panel">
+                <i class="fa-solid fa-wand-magic-sparkles stat-icon"></i>
+                <div class="stat-number counter" data-target="95">0</div>
+                <div class="stat-label">Restoration Improvement (%)</div>
+                <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 5px;">Improved from <20%< /div>
+                </div>
+            </div>
+    </section>
+
+    <!-- The Problem Section -->
+    <section id="problem">
+        <h2 class="section-title">The <span>Challenge</span></h2>
+        <div class="split-layout">
+            <div class="problem-content">
+                <p>Preserving the rich history embedded in ancient stone inscriptions is a race against time. Natural
+                    weathering and human interference have left these artifacts severely degraded, making traditional
+                    preservation methods insufficient.</p>
+                <ul>
+                    <li><i class="fa-solid fa-circle-xmark"></i> <strong>No Existing OCR:</strong> Traditional Optical
+                        Character Recognition systems fail completely on complex, degraded stone surfaces.</li>
+                    <li><i class="fa-solid fa-hourglass-half"></i> <strong>Time Consuming:</strong> Manual transcription
+                        and translation by expert epigraphists takes 2-4 hours per inscription.</li>
+                    <li><i class="fa-solid fa-cloud-rain"></i> <strong>Severe Degradation:</strong> Centures of
+                        weathering make characters barely visible to the naked eye.</li>
+                </ul>
+            </div>
+            <div class="image-placeholder glass-panel" style="border: none; overflow: hidden;">
+                <img src="pictures/inscription.jpg" alt="Ancient Inscription"
+                    style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Team & Contact Section (Combined) -->
+    <section id="team">
+        <h2 class="section-title">Research <span>Team & Contact</span></h2>
+        <p style="text-align: center; color: var(--text-muted); max-width: 700px; margin: -2rem auto 3rem auto;">Meet
+            the researchers and supervisors behind Silent Script. Feel free to reach out for collaborations or
+            inquiries.</p>
+
+        <div class="contact-grid">
+            <!-- Student 1 -->
+            <div class="contact-card glass-panel">
+                <img src="pictures/lahiru.jpeg" alt="Lahiru Bandara">
+                <h3>Lahiru Bandara</h3>
+                <p>Lead Researcher</p>
+                <div class="contact-links">
+                    <a href="mailto:bandaralahiru9@gmail.com" class="contact-link"><i class="fa-solid fa-envelope"></i>
+                        bandaralahiru9@gmail.com</a>
+                    <a href="tel:+94701234567" class="contact-link"><i class="fa-solid fa-phone"></i> +94 70 123
+                        4567</a>
+                    <a href="https://www.linkedin.com/in/lahiru-bandara-a862462a5/" class="contact-link"
+                        target="_blank"><i class="fa-brands fa-linkedin"></i> LinkedIn Profile</a>
+                </div>
+            </div>
+
+            <!-- Student 2 -->
+            <div class="contact-card glass-panel">
+                <img src="pictures/hansini.jpeg" alt="Amadhi Hansani">
+                <h3>Amadhi Hansani</h3>
+                <p>Researcher</p>
+                <div class="contact-links">
+                    <a href="mailto:IT22069436@my.sliit.lk" class="contact-link"><i class="fa-solid fa-envelope"></i>
+                        IT22069436@my.sliit.lk</a>
+                    <a href="tel:+94712345678" class="contact-link"><i class="fa-solid fa-phone"></i> +94 71 234
+                        5678</a>
+                    <a href="https://www.linkedin.com/in/amadhi-hansani-0b9b11316?utm_source=share_via&utm_content=profile&utm_medium=member_ios"
+                        class="contact-link" target="_blank"><i class="fa-brands fa-linkedin"></i> LinkedIn Profile</a>
+                </div>
+            </div>
+
+            <!-- Student 3 -->
+            <div class="contact-card glass-panel">
+                <img src="pictures/mesandu.jpeg" alt="Senod Mesandu">
+                <h3>Senod Mesandu</h3>
+                <p>Researcher</p>
+                <div class="contact-links">
+                    <a href="mailto:IT22108890@my.sliit.lk" class="contact-link"><i class="fa-solid fa-envelope"></i>
+                        IT22108890@my.sliit.lk</a>
+                    <a href="tel:+94723456789" class="contact-link"><i class="fa-solid fa-phone"></i> +94 72 345
+                        6789</a>
+                    <a href="https://www.linkedin.com/in/senod-weerakoon/" class="contact-link" target="_blank"><i
+                            class="fa-brands fa-linkedin"></i> LinkedIn Profile</a>
+                </div>
+            </div>
+
+            <!-- Student 4 -->
+            <div class="contact-card glass-panel">
+                <img src="pictures/handapangoda.jpeg" alt="Chamodya Handapangoda">
+                <h3>Chamodya Handapangoda</h3>
+                <p>Researcher</p>
+                <div class="contact-links">
+                    <a href="mailto:IT22586070@my.sliit.lk" class="contact-link"><i class="fa-solid fa-envelope"></i>
+                        IT22586070@my.sliit.lk</a>
+                    <a href="tel:+94754567890" class="contact-link"><i class="fa-solid fa-phone"></i> +94 75 456
+                        7890</a>
+                    <a href="https://www.linkedin.com/in/chamodya-nethmini-02a523276" class="contact-link"
+                        target="_blank"><i class="fa-brands fa-linkedin"></i> LinkedIn Profile</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="contact-form-wrapper">
+            <h3><i class="fa-solid fa-paper-plane gold-text" style="margin-right: 8px;"></i> Send Us a Message</h3>
+            <p class="form-subtitle">Have a question or want to collaborate? Drop us a message below.</p>
+            <form id="contact-form" class="contact-form glass-panel">
+                <div class="form-group">
+                    <label for="from_name">Name</label>
+                    <input type="text" id="from_name" name="from_name" placeholder="Your full name" required />
+                </div>
+                <div class="form-group">
+                    <label for="mobile">Mobile</label>
+                    <input type="tel" id="mobile" name="mobile" placeholder="+94 7X XXX XXXX" required />
+                </div>
+                <div class="form-group">
+                    <label for="question">Question</label>
+                    <textarea id="question" name="question" rows="5" placeholder="Type your question here..." required></textarea>
+                </div>
+                <button type="submit" class="btn-send" id="send-btn">
+                    <span class="btn-text"><i class="fa-solid fa-paper-plane"></i> Send</span>
+                    <span class="spinner"></span>
+                </button>
+                <div id="form-status" class="form-status"></div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Demo Section (Hidden) -->
+    <!-- 
+    <section id="demo" style="padding-top: 0;">
+         <div class="image-placeholder glass-panel" style="height: 600px;">
+            <i class="fa-brands fa-youtube" style="font-size: 5rem;"></i>
+            <p>[DEMO VIDEO PLACEHOLDER]</p>
+        </div>
+    </section>
+    -->
+
+    <!-- System Architecture Section -->
+    <section id="architecture">
+        <h2 class="section-title">System <span>Architecture</span></h2>
+
+        <div class="image-placeholder glass-panel architecture-img" style="border: none; height: auto;">
+            <img src="pictures/architecture.jpg" alt="System Architecture" style="width: 100%; border-radius: 12px;">
+        </div>
+
+        <div class="stages-grid">
+            <div class="stage-item glass-panel">
+                <h4>Stage 1: Image Enhancement</h4>
+                <p>Advanced pre-processing using deep learning to remove noise, correct lighting, and highlight faint
+                    carvings on stone.</p>
+            </div>
+            <div class="stage-item glass-panel">
+                <h4>Stage 2: Damage Restoration</h4>
+                <p>Generative models reconstruct missing or heavily weathered parts of characters, boosting readability
+                    from <20% to>90%.</p>
+            </div>
+            <div class="stage-item glass-panel">
+                <h4>Stage 3: Line & Word Segmentation</h4>
+                <p>Instance segmentation algorithms isolate individual lines and words from the continuous, often
+                    irregular ancient script.</p>
+            </div>
+            <div class="stage-item glass-panel">
+                <h4>Stage 4: Character Segmentation</h4>
+                <p>Precise extraction of individual characters, handling overlapping and joined ancient letters.</p>
+            </div>
+            <div class="stage-item glass-panel">
+                <h4>Stage 5: Character Recognition</h4>
+                <p>A custom Improved U-Net architecture classifies ancient characters with 94.6% accuracy, mapping them
+                    to modern digital equivalents.</p>
+            </div>
+            <div class="stage-item glass-panel">
+                <h4>Stage 6: Translation</h4>
+                <p>A specialized Neural Machine Translation model converts the recognized ancient syntax into modern
+                    readable text.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Components Section -->
+    <section id="components">
+        <h2 class="section-title">Key <span>Components</span></h2>
+        <div class="components-grid">
+            <div class="component-card glass-panel">
+                <h3><i class="fa-solid fa-language gold-text"></i> Character Recognition</h3>
+                <p>Custom convolutional neural network trained on a newly curated dataset of ancient scripts to achieve
+                    high-precision classification.</p>
+                <span class="owner"><i class="fa-solid fa-user-gear"></i> Lahiru Bandara</span>
+            </div>
+            <div class="component-card glass-panel">
+                <h3><i class="fa-solid fa-wand-magic gold-text"></i> Image Enhancement</h3>
+                <p>Generative Adversarial Networks (GANs) specialized in texture filtering and contrast enhancement for
+                    lithic surfaces.</p>
+                <span class="owner"><i class="fa-solid fa-user-gear"></i> Chamodya Handapangoda</span>
+            </div>
+
+            <div class="component-card glass-panel">
+                <h3><i class="fa-solid fa-language gold-text"></i> Word Segmentation & Translation</h3>
+                <p>An integrated pipeline using spacing detection and Transformer-based NLP models to decode and
+                    translate ancient syntax.</p>
+                <span class="owner"><i class="fa-solid fa-user-gear"></i> Amadhi Hansani</span>
+            </div>
+            <div class="component-card glass-panel">
+                <h3><i class="fa-solid fa-hammer gold-text"></i> Damage Restoration</h3>
+                <p>Inpainting algorithms utilizing contextual awareness to reconstruct eroded or broken characters based
+                    on surrounding text.</p>
+                <span class="owner"><i class="fa-solid fa-user-gear"></i> Senod Mesandu</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section id="results">
+        <h2 class="section-title">Experimental <span>Results</span></h2>
+
+        <div class="results-container">
+            <!-- Progress Bars -->
+            <div class="progress-wrapper glass-panel" style="padding: 2rem;">
+                <h3 style="margin-bottom: 1.5rem; color: var(--gold);">System Accuracy Metrics</h3>
+
+                <div class="progress-item">
+                    <div class="progress-label"><span>Character Recognition Accuracy</span> <span>94.6%</span></div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-width="94.6%"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-label"><span>Damage Restoration Accuracy</span> <span>95%</span></div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-width="95%"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-label"><span>Segmentation Precision</span> <span>91%</span></div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-width="91%"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <div class="progress-label"><span>Translation BLEU Score</span> <span>88%</span></div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-width="88%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Table Placeholders -->
+            <div class="table-responsive glass-panel" style="padding: 1rem;">
+                <h4 style="margin: 1rem; color: var(--text-main);">Table I: Model Comparison for Character Recognition
+                </h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Model</th>
+                            <th>Precision</th>
+                            <th>Recall</th>
+                            <th>F1-Score</th>
+                            <th>Accuracy</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Baseline CNN</td>
+                            <td>0.82</td>
+                            <td>0.80</td>
+                            <td>0.81</td>
+                            <td>81.5%</td>
+                        </tr>
+                        <tr>
+                            <td>ResNet-50</td>
+                            <td>0.89</td>
+                            <td>0.88</td>
+                            <td>0.88</td>
+                            <td>88.2%</td>
+                        </tr>
+                        <tr>
+                            <td class="gold-text" style="font-weight: 600;">Improved U-Net (Ours)</td>
+                            <td class="gold-text">0.96</td>
+                            <td class="gold-text">0.94</td>
+                            <td class="gold-text">0.95</td>
+                            <td class="gold-text" style="font-weight: 600;">94.6%</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="video-container glass-panel" style="padding: 2rem; text-align: center;">
+                <h3 style="margin-bottom: 1.5rem; color: var(--gold);">System Demonstration</h3>
+                <div style="max-width: 800px; margin: 0 auto;">
+                    <video width="100%" height="auto" controls style="border-radius: 12px; border: 1px solid var(--border-color); box-shadow: 0 8px 32px rgba(0,0,0,0.4);">
+                        <source src="pictures/WhatsApp Video 2026-05-05 at 1.06.42 AM.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <p style="margin-top: 1.5rem; color: var(--text-muted);">Real-time character recognition and restoration in action.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Documents Section -->
+    <section id="documents">
+        <h2 class="section-title">Project <span>Documents</span></h2>
+        <div class="docs-grid">
+            <a href="Silent_Script_Research_Paper.pdf" class="doc-card glass-panel" target="_blank">
+                <i class="fa-solid fa-file-pdf doc-icon"></i>
+                <div class="doc-info">
+                    <h4>Research Paper</h4>
+                    <p>Final Submission (PDF)</p>
+                </div>
+            </a>
+            <a href="pictures/architecture.jpg" class="doc-card glass-panel" target="_blank">
+                <i class="fa-solid fa-diagram-project doc-icon" style="color: var(--gold);"></i>
+                <div class="doc-info">
+                    <h4>System Architecture</h4>
+                    <p>High-Res Diagram (JPG)</p>
+                </div>
+            </a>
+            <!-- Reports -->
+            <a href="documents/Lahiru_Report.pdf" class="doc-card glass-panel" target="_blank">
+                <i class="fa-solid fa-file-pdf doc-icon"></i>
+                <div class="doc-info">
+                    <h4>Character Recognition</h4>
+                    <p>Lahiru - Individual Report</p>
+                </div>
+            </a>
+            <a href="documents/Hansini_Report.pdf" class="doc-card glass-panel" target="_blank">
+                <i class="fa-solid fa-file-pdf doc-icon"></i>
+                <div class="doc-info">
+                    <h4>Word Segmentation & Translation</h4>
+                    <p>Hansini - Individual Report</p>
+                </div>
+            </a>
+            <a href="documents/Senod_Report.pdf" class="doc-card glass-panel" target="_blank">
+                <i class="fa-solid fa-file-pdf doc-icon"></i>
+                <div class="doc-info">
+                    <h4>Character Restoration</h4>
+                    <p>Senod - Individual Report</p>
+                </div>
+            </a>
+            <a href="documents/Handapangoda_Report.pdf" class="doc-card glass-panel" target="_blank">
+                <i class="fa-solid fa-file-pdf doc-icon"></i>
+                <div class="doc-info">
+                    <h4>Image Enhancement</h4>
+                    <p>Handapangoda - Individual Report</p>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    </section>
+
+    <!-- Acknowledgements -->
+    <section id="acknowledgements" style="text-align: center; max-width: 800px;">
+        <h2 class="section-title"><span>Acknowledgements</span></h2>
+        <p class="glass-panel" style="padding: 2rem;">
+            We express our deepest gratitude to the Department of Archaeology, Sri Lanka, for their invaluable support
+            and for providing access to essential historical datasets. Special thanks to our supervisors and the faculty
+            at SLIIT for their continuous guidance throughout this research project.
+        </p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo">
+            <img src="pictures/sliit logo.png" alt="SLIIT Logo">
+        </div>
+        <p class="footer-text">Sri Lanka Institute of Information Technology (SLIIT)</p>
+        <p class="footer-text" style="margin-top: 2rem; opacity: 0.6;">&copy; 2026 Silent Script Research Team. All
+            rights reserved.</p>
+    </footer>
+
+    <!-- Inline JavaScript for Interactivity -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // Theme Switcher Logic
+            const themeToggle = document.getElementById('theme-toggle');
+            const body = document.body;
+
+            // Check for saved theme
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                body.classList.remove('light-mode');
+            } else {
+                body.classList.add('light-mode');
+            }
+
+            themeToggle.addEventListener('click', () => {
+                body.classList.toggle('light-mode');
+                const isLight = body.classList.contains('light-mode');
+                localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            });
+
+            // Mobile Menu Toggle
+            const mobileToggle = document.getElementById('mobile-toggle');
+            const navMenu = document.getElementById('nav-menu');
+            const navLinks = document.querySelectorAll('.nav-links a');
+
+            mobileToggle.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                const icon = mobileToggle.querySelector('i');
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-xmark');
+            });
+
+            // Close menu when a link is clicked
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                    const icon = mobileToggle.querySelector('i');
+                    icon.classList.add('fa-bars');
+                    icon.classList.remove('fa-xmark');
+                });
+            });
+
+            // Navbar Scroll Effect
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // Intersection Observer for Scroll Animations
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+
+                        // Trigger Progress Bars
+                        if (entry.target.id === 'results') {
+                            const progressFills = entry.target.querySelectorAll('.progress-fill');
+                            progressFills.forEach(bar => {
+                                bar.style.width = bar.getAttribute('data-width');
+                            });
+                        }
+
+                        // Trigger Counter Animations
+                        if (entry.target.id === 'abstract') {
+                            const counters = entry.target.querySelectorAll('.counter');
+                            const speed = 40;
+                            counters.forEach(counter => {
+                                const updateCount = () => {
+                                    const target = +counter.getAttribute('data-target');
+                                    const count = +counter.innerText;
+                                    const inc = target / speed;
+                                    if (count < target) {
+                                        counter.innerText = Math.ceil(count + inc);
+                                        setTimeout(updateCount, 40);
+                                    } else {
+                                        counter.innerText = target;
+                                    }
+                                };
+                                updateCount();
+                            });
+                        }
+
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('section').forEach(section => {
+                if (section.id !== 'hero') { // Hero is visible by default
+                    observer.observe(section);
+                }
+            });
+
+            // Scroll Progress Bar
+            window.onscroll = () => {
+                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (winScroll / height) * 100;
+                document.getElementById("scroll-progress").style.width = scrolled + "%";
+            };
+
+            // Subtle Mouse Tracking for Background
+            document.addEventListener('mousemove', (e) => {
+                const x = e.clientX / window.innerWidth;
+                const y = e.clientY / window.innerHeight;
+                document.body.style.backgroundPosition = `${50 + x * 2}% ${50 + y * 2}%`;
+            });
+
+            // --- EmailJS Contact Form ---
+            emailjs.init('xNV5gsTvQ1Xtd-hR5');
+
+            const contactForm = document.getElementById('contact-form');
+            const sendBtn = document.getElementById('send-btn');
+            const formStatus = document.getElementById('form-status');
+
+            contactForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                // Show loading state
+                sendBtn.classList.add('loading');
+                sendBtn.disabled = true;
+                formStatus.className = 'form-status';
+                formStatus.style.display = 'none';
+
+                const templateParams = {
+                    from_name: document.getElementById('from_name').value,
+                    mobile: document.getElementById('mobile').value,
+                    message: document.getElementById('question').value,
+                    to_email: 'cnhandapangoda@gmail.com'
+                };
+
+                emailjs.send('service_re0w6dl', 'template_dtvibg3', templateParams)
+                    .then(function () {
+                        sendBtn.classList.remove('loading');
+                        sendBtn.disabled = false;
+                        formStatus.className = 'form-status success';
+                        formStatus.innerHTML = '<i class="fa-solid fa-circle-check"></i> Message sent successfully! We\'ll get back to you soon.';
+                        contactForm.reset();
+
+                        // Auto-hide success message after 5s
+                        setTimeout(() => {
+                            formStatus.style.display = 'none';
+                        }, 5000);
+                    }, function (error) {
+                        sendBtn.classList.remove('loading');
+                        sendBtn.disabled = false;
+                        formStatus.className = 'form-status error';
+                        formStatus.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> Failed to send message. Please try again or email us directly.';
+                        console.error('EmailJS Error:', error);
+                    });
+            });
+
+        });
+    </script>
+</body>
+
+</html>
